@@ -19,6 +19,13 @@ class Demographic extends Model
     use SoftDeletes, HasFactory;
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['emailAddress'];
+
+    /**
      * The table associated with the model.
      *
      * @var string
@@ -28,6 +35,22 @@ class Demographic extends Model
         'phone_id',
         'cellphone_id',
         'email_address_id',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'id',
+        'address_id',
+        'phone_id',
+        'cellphone_id',
+        'email_address_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 
     /**
