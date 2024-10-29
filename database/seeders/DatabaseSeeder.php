@@ -1,4 +1,11 @@
 <?php
+/*
+ * Copyright (c) 2024
+ *
+ *  @author Juan Manuel Cortéz <juanm.cortez@gmail.com>
+ *  @copyright 2024 Nobidium LLC.
+ *  @license MIT License
+ */
 
 namespace Database\Seeders;
 
@@ -16,9 +23,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $user = User::factory()->create([
+            'username' => 'testuser',
+        ]);
+        $user->demographic->emailAddress()->update([
+            'email' => 'text@example.com',
         ]);
     }
 }
