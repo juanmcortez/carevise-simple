@@ -11,6 +11,7 @@ namespace Database\Seeders;
 
 use App\Models\Users\User;
 use Illuminate\Database\Seeder;
+use App\Models\Patients\Patient;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -21,13 +22,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Inital User
         $user = User::factory()->create([
             'username' => 'testuser',
         ]);
         $user->demographic->emailAddress()->update([
             'email' => 'text@example.com',
         ]);
+
+        // Generic users
+        User::factory(4)->create();
+
+        // Generic Patients
+        Patient::factory(298)->create();
     }
 }
