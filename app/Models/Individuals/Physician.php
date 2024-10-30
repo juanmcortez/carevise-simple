@@ -7,22 +7,33 @@
  *  @license MIT License
  */
 
-namespace App\Models\Commons;
+namespace App\Models\Individuals;
 
+use App\Models\Commons\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Phone extends Model
+class Physician extends Model
 {
     use SoftDeletes, HasFactory;
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['demographic'];
 
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'demographics_phones';
+    protected $fillable = [
+        'demographic_id',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -31,8 +42,20 @@ class Phone extends Model
      */
     protected $hidden = [
         'id',
+        'demographic_id',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * The demographic relationship associated with the model.
+     *
+     * @return HasOne
+     */
+    public function demographic(): HasOne
+    {
+        return $this->hasOne(Demographic::class, 'id', 'demographic_id')
+            ->withDefault();
+    }
 }
