@@ -12,6 +12,7 @@ namespace Database\Seeders;
 use App\Models\Users\User;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
+use App\Models\Insurances\Company;
 use App\Models\Individuals\Physician;
 use App\Models\Institutions\Facility;
 
@@ -40,6 +41,9 @@ class DatabaseSeeder extends Seeder
 
         // Generic Physicians
         Physician::factory(17)->create();
+
+        // Generic Insurances
+        Company::factory(32)->create();
 
         // Generic Patients
         Patient::factory(298)->create();
