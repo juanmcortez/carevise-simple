@@ -11,6 +11,7 @@ namespace Database\Seeders;
 
 use App\Models\Users\User;
 use Illuminate\Database\Seeder;
+use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use App\Models\Insurances\Company;
 use App\Models\Invoices\Encounter;
@@ -48,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         // Generic Patients
         Patient::factory(298)->create()->each(
-            function($patient){
+            function ($patient) {
                 $total_encounters = random_int(0, 5);
                 if($total_encounters) {
                     Encounter::factory($total_encounters)->create([
@@ -57,7 +58,14 @@ class DatabaseSeeder extends Seeder
                         'referring_physician_id' => Physician::query()->inRandomOrder()->first()->id,
                         'service_facility_id' => Facility::query()->inRandomOrder()->first()->id,
                         'billing_facility_id' => Facility::query()->inRandomOrder()->first()->id,
-                    ]);
+                    ])->each(
+                        function ($invoice) {
+                            $total_charges = random_int(0, 10);
+                            Charge::factory($total_charges)->create([
+                                'enc' => $invoice->enc,
+                            ]);
+                        }
+                    );
                 }
             }
         );
