@@ -7,23 +7,18 @@
  *  @license MIT License
  */
 
-namespace App\Models\Commons;
+namespace App\Models\Institutions;
 
+use App\Models\Commons\Phone;
+use App\Models\Commons\Address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Demographic extends Model
+class Facility extends Model
 {
     use SoftDeletes, HasFactory;
-
-    /**
-     * The relationships that should always be loaded.
-     *
-     * @var array
-     */
-    protected $with = ['emailAddress'];
 
     /**
      * The attributes that are mass assignable.
@@ -32,9 +27,10 @@ class Demographic extends Model
      */
     protected $fillable = [
         'address_id',
+        'pay_to_address_id',
         'phone_id',
         'cellphone_id',
-        'email_address_id',
+        'fax_id',
     ];
 
     /**
@@ -44,10 +40,6 @@ class Demographic extends Model
      */
     protected $hidden = [
         'id',
-        'address_id',
-        'phone_id',
-        'cellphone_id',
-        'email_address_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -60,8 +52,17 @@ class Demographic extends Model
      */
     public function address(): HasOne
     {
-        return $this->hasOne(Address::class, 'id', 'address_id')
-            ->withDefault();
+        return $this->hasOne(Address::class, 'id', 'address_id');
+    }
+
+    /**
+     * The pay-to address relationship associated with the model.
+     *
+     * @return HasOne
+     */
+    public function payToAddress(): HasOne
+    {
+        return $this->hasOne(Address::class, 'id', 'pay_to_address_id');
     }
 
     /**
@@ -71,8 +72,7 @@ class Demographic extends Model
      */
     public function phone(): HasOne
     {
-        return $this->hasOne(Phone::class, 'id', 'phone_id')
-            ->withDefault();
+        return $this->hasOne(Phone::class, 'id', 'phone_id');
     }
 
     /**
@@ -82,18 +82,16 @@ class Demographic extends Model
      */
     public function cellphone(): HasOne
     {
-        return $this->hasOne(Phone::class, 'id', 'cellphone_id')
-            ->withDefault();
+        return $this->hasOne(Phone::class, 'id', 'cellphone_id');
     }
 
     /**
-     * The email address relationship associated with the model.
+     * The fax relationship associated with the model.
      *
      * @return HasOne
      */
-    public function emailAddress(): HasOne
+    public function fax(): HasOne
     {
-        return $this->hasOne(EmailAddress::class, 'id', 'email_address_id')
-            ->withDefault();
+        return $this->hasOne(Phone::class, 'id', 'fax_id');
     }
 }

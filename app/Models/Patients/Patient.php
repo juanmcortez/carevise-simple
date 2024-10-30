@@ -9,10 +9,12 @@
 
 namespace App\Models\Patients;
 
+use App\Models\Invoices\Encounter;
 use App\Models\Commons\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Patient extends Model
@@ -34,9 +36,9 @@ class Patient extends Model
     protected $with = ['demographic'];
 
     /**
-     * The table associated with the model.
+     * The attributes that are mass assignable.
      *
-     * @var string
+     * @var array
      */
     protected $fillable = [
         'demographic_id',
@@ -64,5 +66,16 @@ class Patient extends Model
     {
         return $this->hasOne(Demographic::class, 'id', 'demographic_id')
             ->withDefault();
+    }
+
+    /**
+     * The invoices relationship associated with the model.
+     *
+     * @return HasMany
+     */
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Encounter::class, 'pid', 'pid')
+            ->orderBy('date_of_service', 'desc');
     }
 }
