@@ -40,7 +40,6 @@ class Facility extends Model
      */
     protected $hidden = [
         'id',
-        'demographic_id',
         'created_at',
         'updated_at',
         'deleted_at',
