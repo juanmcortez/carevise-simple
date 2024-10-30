@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Inital User
+        // Initial User
         $user = User::factory()->create([
             'username' => 'testuser',
         ]);
