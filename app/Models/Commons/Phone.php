@@ -23,4 +23,16 @@ class Phone extends Model
      * @var string
      */
     protected $table = 'demographics_phones';
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 }

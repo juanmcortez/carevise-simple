@@ -20,6 +20,13 @@ class Physician extends Model
     use SoftDeletes, HasFactory;
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['demographic'];
+
+    /**
      * The table associated with the model.
      *
      * @var string
