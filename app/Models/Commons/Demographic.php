@@ -26,9 +26,9 @@ class Demographic extends Model
     protected $with = ['emailAddress'];
 
     /**
-     * The table associated with the model.
+     * The attributes that are mass assignable.
      *
-     * @var string
+     * @var array
      */
     protected $fillable = [
         'address_id',

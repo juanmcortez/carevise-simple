@@ -21,9 +21,9 @@ class Facility extends Model
     use SoftDeletes, HasFactory;
 
     /**
-     * The table associated with the model.
+     * The attributes that are mass assignable.
      *
-     * @var string
+     * @var array
      */
     protected $fillable = [
         'address_id',

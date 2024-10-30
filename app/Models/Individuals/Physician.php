@@ -27,9 +27,9 @@ class Physician extends Model
     protected $with = ['demographic'];
 
     /**
-     * The table associated with the model.
+     * The attributes that are mass assignable.
      *
-     * @var string
+     * @var array
      */
     protected $fillable = [
         'demographic_id',
