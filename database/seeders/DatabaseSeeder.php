@@ -13,6 +13,7 @@ use App\Models\Users\User;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Individuals\Physician;
+use App\Models\Institutions\Facility;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -33,6 +34,9 @@ class DatabaseSeeder extends Seeder
 
         // Generic users
         User::factory(4)->create();
+
+        // Generic Facilities
+        Facility::factory(6)->create();
 
         // Generic Physicians
         Physician::factory(17)->create();
