@@ -11,6 +11,7 @@ namespace Database\Seeders;
 
 use App\Models\Users\User;
 use App\Models\Checks\Check;
+use App\Models\Checks\Payment;
 use Illuminate\Database\Seeder;
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
@@ -50,7 +51,7 @@ class DatabaseSeeder extends Seeder
         Company::factory(32)->create();
 
         // Generic Patients
-        Patient::factory(298)->create()->each(
+        Patient::factory(75)->create()->each(
             function ($patient) {
                 $total_encounters = random_int(0, 5);
                 if ($total_encounters) {
@@ -82,10 +83,33 @@ class DatabaseSeeder extends Seeder
         );
 
         // Generic Checks
-        Check::factory(55)->create([
+        Check::factory(22)->create([
             'payment_entity' => 'insurance',
             'payment_category' => 'insurance_payment',
             'payment_method' => 'check_deposit'
-        ]);
+        ])->each(
+            function ($check) {
+                $patient = Patient::query()->inRandomOrder()->first();
+                $total_invoices = $patient->invoices->count();
+                $total_payments = random_int(1, 3);
+                if ($total_invoices) {
+                    // Create payments tied to charges
+                    $invoice = $patient->invoices()->inRandomOrder()->first();
+                    $invoice->charges()->each(
+                        function ($charge) use ($total_payments, $check) {
+                            Payment::factory($total_payments)->create([
+                                'chk' => $check->chk,
+                                'chr' => $charge->chr,
+                            ]);
+                        }
+                    );
+                } else {
+                    // Create payment only tied to the check
+                    Payment::factory($total_payments)->create([
+                        'chk' => $check->chk,
+                    ]);
+                }
+            }
+        );
     }
 }
