@@ -15,6 +15,7 @@ use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use App\Models\Insurances\Company;
 use App\Models\Invoices\Encounter;
+use App\Models\Invoices\ChargeICD;
 use App\Models\Individuals\Physician;
 use App\Models\Institutions\Facility;
 
@@ -51,7 +52,7 @@ class DatabaseSeeder extends Seeder
         Patient::factory(298)->create()->each(
             function ($patient) {
                 $total_encounters = random_int(0, 5);
-                if($total_encounters) {
+                if ($total_encounters) {
                     Encounter::factory($total_encounters)->create([
                         'pid' => $patient->pid,
                         'rendering_physician_id' => Physician::query()->inRandomOrder()->first()->id,
@@ -63,7 +64,16 @@ class DatabaseSeeder extends Seeder
                             $total_charges = random_int(0, 10);
                             Charge::factory($total_charges)->create([
                                 'enc' => $invoice->enc,
-                            ]);
+                            ])->each(
+                                function ($charge) {
+                                    $total_icds = random_int(0, 12);
+                                    if ($total_icds) {
+                                        ChargeICD::factory($total_icds)->create([
+                                            'chr' => $charge->chr,
+                                        ]);
+                                    }
+                                }
+                            );
                         }
                     );
                 }
