@@ -15,6 +15,7 @@ use App\Models\Individuals\Physician;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -87,7 +88,8 @@ class Encounter extends Model
      */
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class, 'pid', 'pid');
+        return $this->belongsTo(Patient::class, 'pid', 'pid')
+            ->withDefault();
     }
 
     /**
@@ -97,7 +99,8 @@ class Encounter extends Model
      */
     public function renderingPhysician(): HasOne
     {
-        return $this->hasOne(Physician::class, 'id', 'rendering_physician_id');
+        return $this->hasOne(Physician::class, 'id', 'rendering_physician_id')
+            ->withDefault();
     }
 
     /**
@@ -107,7 +110,8 @@ class Encounter extends Model
      */
     public function referringPhysician(): HasOne
     {
-        return $this->hasOne(Physician::class, 'id', 'referring_physician_id');
+        return $this->hasOne(Physician::class, 'id', 'referring_physician_id')
+            ->withDefault();
     }
 
     /**
@@ -117,7 +121,8 @@ class Encounter extends Model
      */
     public function serviceFacility(): HasOne
     {
-        return $this->hasOne(Facility::class, 'id', 'service_facility_id');
+        return $this->hasOne(Facility::class, 'id', 'service_facility_id')
+            ->withDefault();
     }
 
     /**
@@ -127,6 +132,18 @@ class Encounter extends Model
      */
     public function billingFacility(): HasOne
     {
-        return $this->hasOne(Facility::class, 'id', 'billing_facility_id');
+        return $this->hasOne(Facility::class, 'id', 'billing_facility_id')
+            ->withDefault();
+    }
+
+    /**
+     * The charges relationship associated with the model
+     *
+     * @return HasMany
+     */
+    public function charges(): HasMany
+    {
+        return $this->hasMany(Charge::class, 'enc', 'enc')
+            ->orderBy('code');
     }
 }

@@ -52,7 +52,8 @@ class Facility extends Model
      */
     public function address(): HasOne
     {
-        return $this->hasOne(Address::class, 'id', 'address_id');
+        return $this->hasOne(Address::class, 'id', 'address_id')
+            ->withDefault();
     }
 
     /**
@@ -62,7 +63,8 @@ class Facility extends Model
      */
     public function payToAddress(): HasOne
     {
-        return $this->hasOne(Address::class, 'id', 'pay_to_address_id');
+        return $this->hasOne(Address::class, 'id', 'pay_to_address_id')
+            ->withDefault();
     }
 
     /**
@@ -72,7 +74,8 @@ class Facility extends Model
      */
     public function phone(): HasOne
     {
-        return $this->hasOne(Phone::class, 'id', 'phone_id');
+        return $this->hasOne(Phone::class, 'id', 'phone_id')
+            ->withDefault();
     }
 
     /**
@@ -82,7 +85,8 @@ class Facility extends Model
      */
     public function cellphone(): HasOne
     {
-        return $this->hasOne(Phone::class, 'id', 'cellphone_id');
+        return $this->hasOne(Phone::class, 'id', 'cellphone_id')
+            ->withDefault();
     }
 
     /**
@@ -92,6 +96,7 @@ class Facility extends Model
      */
     public function fax(): HasOne
     {
-        return $this->hasOne(Phone::class, 'id', 'fax_id');
+        return $this->hasOne(Phone::class, 'id', 'fax_id')
+            ->withDefault();
     }
 }
