@@ -9,6 +9,7 @@
 
 namespace App\Models\Invoices;
 
+use App\Models\Checks\Payment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -79,7 +80,7 @@ class Charge extends Model
      */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Encounter::class, 'enc', 'enc');
+        return $this->belongsTo(Encounter::class, 'enc', 'enc')->withDefault();
     }
 
     /**
@@ -90,5 +91,15 @@ class Charge extends Model
     public function icds(): HasMany
     {
         return $this->hasMany(ChargeICD::class, 'chr', 'chr');
+    }
+
+    /**
+     * The payments relationship associated with the model.
+     *
+     * @return HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'chr', 'chr');
     }
 }
