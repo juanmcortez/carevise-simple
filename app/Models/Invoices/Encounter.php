@@ -88,7 +88,8 @@ class Encounter extends Model
      */
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class, 'pid', 'pid')->withDefault();
+        return $this->belongsTo(Patient::class, 'pid', 'pid')
+            ->withDefault();
     }
 
     /**
@@ -98,7 +99,8 @@ class Encounter extends Model
      */
     public function renderingPhysician(): HasOne
     {
-        return $this->hasOne(Physician::class, 'id', 'rendering_physician_id');
+        return $this->hasOne(Physician::class, 'id', 'rendering_physician_id')
+            ->withDefault();
     }
 
     /**
@@ -108,7 +110,8 @@ class Encounter extends Model
      */
     public function referringPhysician(): HasOne
     {
-        return $this->hasOne(Physician::class, 'id', 'referring_physician_id');
+        return $this->hasOne(Physician::class, 'id', 'referring_physician_id')
+            ->withDefault();
     }
 
     /**
@@ -118,7 +121,8 @@ class Encounter extends Model
      */
     public function serviceFacility(): HasOne
     {
-        return $this->hasOne(Facility::class, 'id', 'service_facility_id');
+        return $this->hasOne(Facility::class, 'id', 'service_facility_id')
+            ->withDefault();
     }
 
     /**
@@ -128,7 +132,8 @@ class Encounter extends Model
      */
     public function billingFacility(): HasOne
     {
-        return $this->hasOne(Facility::class, 'id', 'billing_facility_id');
+        return $this->hasOne(Facility::class, 'id', 'billing_facility_id')
+            ->withDefault();
     }
 
     /**
@@ -138,6 +143,7 @@ class Encounter extends Model
      */
     public function charges(): HasMany
     {
-        return $this->hasMany(Charge::class, 'enc', 'enc');
+        return $this->hasMany(Charge::class, 'enc', 'enc')
+            ->orderBy('code');
     }
 }

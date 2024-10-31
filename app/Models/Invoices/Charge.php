@@ -80,7 +80,8 @@ class Charge extends Model
      */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(Encounter::class, 'enc', 'enc')->withDefault();
+        return $this->belongsTo(Encounter::class, 'enc', 'enc')
+            ->withDefault();
     }
 
     /**
@@ -90,7 +91,8 @@ class Charge extends Model
      */
     public function icds(): HasMany
     {
-        return $this->hasMany(ChargeICD::class, 'chr', 'chr');
+        return $this->hasMany(ChargeICD::class, 'chr', 'chr')
+            ->orderBy('code');
     }
 
     /**

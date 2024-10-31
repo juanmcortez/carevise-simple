@@ -64,7 +64,8 @@ class Payment extends Model
      */
     public function check(): BelongsTo
     {
-        return $this->belongsTo(Check::class, 'chk', 'chk')->withDefault();
+        return $this->belongsTo(Check::class, 'chk', 'chk')
+            ->withDefault();
     }
 
     /**
@@ -74,6 +75,7 @@ class Payment extends Model
      */
     public function charge(): BelongsTo
     {
-        return $this->belongsTo(Charge::class, 'chr', 'chr')->withDefault();
+        return $this->belongsTo(Charge::class, 'chr', 'chr')
+            ->withDefault();
     }
 }

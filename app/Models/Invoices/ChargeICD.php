@@ -63,6 +63,7 @@ class ChargeICD extends Model
      */
     public function charge(): BelongsTo
     {
-        return $this->belongsTo(Charge::class, 'chr', 'chr')->withDefault();
+        return $this->belongsTo(Charge::class, 'chr', 'chr')
+            ->withDefault();
     }
 }
