@@ -11,6 +11,7 @@ namespace App\Models\Invoices;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -79,5 +80,15 @@ class Charge extends Model
     public function invoice(): BelongsTo
     {
         return $this->belongsTo(Encounter::class, 'enc', 'enc');
+    }
+
+    /**
+     * The icds relationship associated with the model.
+     *
+     * @return HasMany
+     */
+    public function icds(): HasMany
+    {
+        return $this->hasMany(ChargeICD::class, 'chr', 'chr');
     }
 }
