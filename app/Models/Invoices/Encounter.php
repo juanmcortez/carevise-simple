@@ -88,7 +88,7 @@ class Encounter extends Model
      */
     public function patient(): BelongsTo
     {
-        return $this->belongsTo(Patient::class, 'pid', 'pid');
+        return $this->belongsTo(Patient::class, 'pid', 'pid')->withDefault();
     }
 
     /**
