@@ -10,6 +10,7 @@
 namespace Database\Seeders;
 
 use App\Models\Users\User;
+use App\Models\Checks\Check;
 use Illuminate\Database\Seeder;
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
@@ -79,5 +80,12 @@ class DatabaseSeeder extends Seeder
                 }
             }
         );
+
+        // Generic Checks
+        Check::factory(55)->create([
+            'payment_entity' => 'insurance',
+            'payment_category' => 'insurance_payment',
+            'payment_method' => 'check_deposit'
+        ]);
     }
 }
