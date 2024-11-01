@@ -1,13 +1,16 @@
 {{ __('Patient list') }}
 <br />
 <br />
-@empty($patients)
+@if($patients->isEmpty())
     {{ __('There are no patients available.') }}
 @else
     @foreach($patients as $patient)
-        {{ $patient }}<br />
+        <a href="{{ route('patients.detail', ['patient' => $patient->demographic->emailAddress->email]) }}" target="_self">
+            {{ $patient }}
+        </a>
+        <br />
     @endforeach
     <br />
     <br />
     {!! $patients->links() !!}
-@endempty
+@endif

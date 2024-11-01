@@ -7,19 +7,19 @@
  *  @license MIT License
  */
 
-namespace App\Http\Controllers\Patients;
+namespace App\Http\Controllers\Invoices;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\Patients\Patient;
+use App\Models\Invoices\Encounter;
 use App\Http\Controllers\Controller;
 
-class PatientController extends Controller
+class EncounterController extends Controller
 {
-    public function index(): View
+    public function index(): void
     {
-        $patients = Patient::query()->paginate(50);
-        return view('pages.patients.list', compact('patients'));
+        abort(404);
     }
 
     public function create(): void
@@ -32,22 +32,22 @@ class PatientController extends Controller
         abort(404);
     }
 
-    public function show(Patient $patient): View
-    {
-        return view('pages.patients.show', compact('patient'));
-    }
-
-    public function edit(Patient $patient): void
+    public function show(Encounter $encounter): void
     {
         abort(404);
     }
 
-    public function update(Request $request, Patient $patient): void
+    public function edit(Patient $patient, Encounter $encounter): View
+    {
+        return view('pages.invoices.detail', compact('encounter'));
+    }
+
+    public function update(Request $request, Encounter $encounter): void
     {
         abort(404);
     }
 
-    public function destroy(Patient $patient): void
+    public function destroy(Encounter $encounter): void
     {
         abort(404);
     }

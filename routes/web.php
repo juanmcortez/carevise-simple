@@ -10,6 +10,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Commons\DashboardController;
+use App\Http\Controllers\Invoices\EncounterController;
 
 /**
  * Dashboard route with single action controller
@@ -26,4 +27,18 @@ Route::controller(PatientController::class)
         // List
         Route::get('/patients/list', 'index')
             ->name('list');
+        // Detail
+        Route::get('/patient/{patient}/account/detail', 'show')
+            ->name('detail')
+            ->missing(function () {
+                return Redirect::route('patients.list');
+            });
+    });
+
+Route::controller(EncounterController::class)
+    ->name('patient.encounter.')
+    ->group(function () {
+        // Detail
+        Route::get('/patient/{patient}/account/encounter/{encounter}/detail', 'edit')
+            ->name('detail');
     });
