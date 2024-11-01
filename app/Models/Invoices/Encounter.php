@@ -59,6 +59,7 @@ class Encounter extends Model
      */
     protected $hidden = [
         'pid',
+        'patient',
         'rendering_physician_id',
         'referring_physician_id',
         'service_facility_id',
