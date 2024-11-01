@@ -13,7 +13,7 @@
     {{ __('There are no invoices available for this patient.') }}
 @else
     @foreach($patient->invoices as $invoice)
-        <a href="{{ route('patient.encounter.detail', ['patient' => $invoice->patient->demographic->emailAddress->email, 'encounter' => $invoice]) }}">
+        <a href="{{ route('patient.encounter.detail', ['patient' => $invoice->patient->demographic->name_slug, 'encounter' => $invoice]) }}">
             {{ $invoice }}
         </a>
         <br />
