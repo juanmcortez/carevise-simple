@@ -26,4 +26,10 @@ Route::controller(PatientController::class)
         // List
         Route::get('/patients/list', 'index')
             ->name('list');
+        // Detail
+        Route::get('/patient/{patient}/account/detail', 'show')
+            ->name('detail')
+            ->missing(function () {
+                return Redirect::route('patients.list');
+            });
     });

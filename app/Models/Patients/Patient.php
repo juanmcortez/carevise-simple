@@ -36,6 +36,14 @@ class Patient extends Model
     protected $with = ['demographic'];
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'email';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -56,6 +64,20 @@ class Patient extends Model
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * Route model binding solved to demographic > email address relationship
+     *
+     * @param $value
+     * @param $field
+     * @return Model|Patient|null
+     */
+    public function resolveRouteBinding($value, $field = null): Model|Patient|null
+    {
+        return $this->whereHas('demographic.emailAddress', function ($query) use ($value){
+            $query->where('email', $value);
+        })->firstOrFail();
+    }
 
     /**
      * The demographic relationship associated with the model.
