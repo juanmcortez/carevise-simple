@@ -40,7 +40,7 @@ class Patient extends Model
      */
     public function getRouteKeyName(): string
     {
-        return 'email';
+        return 'name_slug';
     }
 
     /**
@@ -74,8 +74,16 @@ class Patient extends Model
      */
     public function resolveRouteBinding($value, $field = null): Model|Patient|null
     {
-        return $this->whereHas('demographic.emailAddress', function ($query) use ($value){
-            $query->where('email', $value);
+        return $this->whereHas('demographic', function ($query) use ($value){
+            $slug = explode('-', $value);
+            if($slug[0] === $slug[1]) {
+                $query->where('first_name', $slug[0])
+                    ->where('last_name', $slug[2]);
+            } else {
+                $query->where('first_name', $slug[0])
+                    ->where('middle_name', $slug[1])
+                    ->where('last_name', $slug[2]);
+            }
         })->firstOrFail();
     }
 
