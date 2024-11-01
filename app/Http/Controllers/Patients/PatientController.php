@@ -32,9 +32,9 @@ class PatientController extends Controller
         abort(404);
     }
 
-    public function show(Patient $patient): void
+    public function show(Patient $patient): View
     {
-        abort(404);
+        return view('pages.patients.show', compact('patient'));
     }
 
     public function edit(Patient $patient): void
