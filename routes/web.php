@@ -8,6 +8,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Commons\DashboardController;
 
 /**
@@ -15,3 +16,14 @@ use App\Http\Controllers\Commons\DashboardController;
  */
 Route::get('/', DashboardController::class)
     ->name('dashboard');
+
+/**
+ * Patients routes based on a resource controller
+ */
+Route::controller(PatientController::class)
+    ->name('patients.')
+    ->group(function () {
+        // List
+        Route::get('/patients/list', 'index')
+            ->name('list');
+    });
