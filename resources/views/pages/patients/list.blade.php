@@ -1,9 +1,13 @@
 {{ __('Patient list') }}
 <br />
 <br />
-@foreach($patients as $patient)
-    {{ $patient }}<br />
-@endforeach
-<br />
-<br />
-{!! $patients->links() !!}
+@empty($patients)
+    {{ __('There are no patients available.') }}
+@else
+    @foreach($patients as $patient)
+        {{ $patient }}<br />
+    @endforeach
+    <br />
+    <br />
+    {!! $patients->links() !!}
+@endempty
