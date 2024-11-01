@@ -21,7 +21,13 @@ class DemographicFactory extends Factory
 
     public function definition(): array
     {
+        $gender = $this->faker->randomElement(['male', 'female']);
         return [
+            'first_name' => $this->faker->firstName($gender),
+            'middle_name' => ($this->faker->boolean()) ? $this->faker->firstName($gender) : null,
+            'last_name' => $this->faker->lastName(),
+            'gender' => ($this->faker->boolean()) ? $gender : null,
+            'date_of_birth' => $this->faker->dateTimeBetween('-95 years', '-1 years'),
             'address_id' => Address::factory(),
             'phone_id' => Phone::factory(),
             'cellphone_id' => Phone::factory(),
