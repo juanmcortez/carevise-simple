@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2024
+ *
+ *  @author Juan Manuel Cortéz <juanm.cortez@gmail.com>
+ *  @copyright 2024 Nobidium LLC.
+ *  @license MIT License
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "@flaticon/flaticon-uicons/css/regular/straight.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-optical-sizing: auto;
+    font-style: normal;
+}
