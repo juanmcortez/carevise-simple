@@ -9,10 +9,12 @@
 
 namespace App\Models\Patients;
 
+use Carbon\Carbon;
 use App\Models\Invoices\Encounter;
 use App\Models\Commons\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -66,6 +68,25 @@ class Patient extends Model
     ];
 
     /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'latest_service_date' => 'datetime:M d, Y',
+        ];
+    }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['latest_service_date'];
+
+    /**
      * Route model binding solved to demographic > email address relationship
      *
      * @param $value
@@ -85,6 +106,18 @@ class Patient extends Model
                     ->where('last_name', $slug[2]);
             }
         })->firstOrFail();
+    }
+
+    /**
+     * latest_service_date appended attribute.
+     */
+    protected function latestServiceDate(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->invoices->isNotEmpty()
+                ? Carbon::parse($this->invoices->first()->date_of_service)->format('M d, Y')
+                : ' --- ',
+        );
     }
 
     /**
