@@ -19,6 +19,11 @@ class PatientController extends Controller
     public function index(): View
     {
         $patients = Patient::query()
+            ->join('demographics', 'demographics.id', '=', 'patients.demographic_id')
+            ->orderBy('demographics.last_name')
+            ->orderBy('demographics.first_name')
+            ->orderBy('demographics.middle_name')
+            ->select('patients.*')
             ->paginate(25);
         return view('pages.patients.list', compact('patients'));
     }
