@@ -28,7 +28,7 @@ Route::controller(PatientController::class)
         Route::get('/patients/list', 'index')
             ->name('list');
         // Detail
-        Route::get('/patient/{patient}/account/detail', 'show')
+        Route::get('/patient/{patient}/account/details', 'show')
             ->name('detail')
             ->missing(function () {
                 return Redirect::route('patients.list');
@@ -39,6 +39,6 @@ Route::controller(EncounterController::class)
     ->name('patient.encounter.')
     ->group(function () {
         // Detail
-        Route::get('/patient/{patient}/account/encounter/{encounter}/detail', 'edit')
+        Route::get('/patient/{patient}/encounter/{encounter}/details', 'edit')
             ->name('detail');
     });

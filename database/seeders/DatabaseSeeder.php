@@ -51,7 +51,8 @@ class DatabaseSeeder extends Seeder
         Company::factory(32)->create();
 
         // Generic Patients
-        Patient::factory(75)->create()->each(
+        $total_patients = random_int(15, 155);
+        Patient::factory($total_patients)->create()->each(
             function ($patient) {
                 $total_encounters = random_int(0, 5);
                 if ($total_encounters) {
