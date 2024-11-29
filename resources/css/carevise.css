@@ -6,7 +6,7 @@
  *  @license MIT License
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 @import "@flaticon/flaticon-uicons/css/regular/straight.css";
 
@@ -14,7 +14,278 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html,
+body,
+body * {
     font-optical-sizing: auto;
-    font-style: normal;
+    @apply scroll-smooth;
+    @apply leading-none not-italic;
+    @apply antialiased font-sans;
+    @apply align-middle leading-none;
+    @apply ease-in-out;
+}
+
+body {
+    @apply min-h-screen w-full;
+    @apply m-0 p-0;
+    @apply bg-dark text-light-grey;
+}
+
+#app-holder {
+    @apply min-h-screen w-full;
+    @apply m-0 p-0;
+    @apply bg-gradient-to-b from-dark-fade to-light-fade;
+}
+
+#app-holder aside {
+    @apply flex flex-col;
+    @apply fixed top-0 left-0 z-40;
+    @apply min-h-full w-20;
+    @apply m-0 p-0;
+    @apply transition-transform md:translate-x-0;
+}
+
+#app-holder aside #logo {
+    @apply flex flex-col;
+    @apply justify-center items-center;
+    @apply h-16 w-20;
+    @apply mt-4;
+    @apply border-b border-light-fade/50;
+}
+
+#app-holder aside #logo a {
+    @apply text-4xl leading-9;
+    @apply -rotate-6;
+    @apply text-light;
+    @apply hover:text-light-grey;
+}
+
+#app-holder aside #logo a > i {
+    @apply text-4xl leading-9;
+}
+
+#app-holder aside nav {
+    @apply flex flex-col;
+    @apply justify-between items-center;
+    @apply flex-1 w-20;
+    @apply pt-4 pb-4;
+}
+
+#app-holder aside nav #main-menu-top {
+    @apply flex flex-col;
+    @apply justify-start items-center;
+    @apply space-y-2 pb-2;
+}
+
+#app-holder aside nav #main-menu-bottom {
+    @apply flex flex-col;
+    @apply justify-end items-center;
+    @apply mb-1.5;
+    @apply space-y-2;
+}
+
+#app-holder main {
+    @apply flex flex-col;
+    @apply min-h-screen w-full;
+    @apply py-4 px-4;
+    @apply transition-all md:pl-20;
+}
+
+#app-holder main header {
+    @apply flex flex-row;
+    @apply justify-between items-center;
+    @apply h-16 w-full;
+    @apply px-6;
+    @apply rounded-t;
+    @apply bg-light border-b border-dark-fade/10;
+}
+
+#app-holder main header .header-left h2 {
+    @apply flex flex-row;
+    @apply space-x-3;
+    @apply xl:text-2xl leading-5;
+    @apply uppercase;
+    @apply text-dark font-bold;
+}
+
+#app-holder main header .header-left h2 span {
+    @apply mt-1.5;
+}
+
+#app-holder main header .header-left h2 i {
+    @apply text-2xl xl:text-4xl leading-5;
+    @apply m-0 p-0;
+    @apply text-dark font-normal;
+}
+
+#app-holder main #content {
+    @apply flex flex-col;
+    @apply flex-1 w-full;
+    @apply bg-light;
+    @apply rounded-b;
+}
+
+#app-holder main #content-header {
+    @apply flex flex-row;
+    @apply justify-between items-center;
+    @apply h-16 w-full;
+    @apply px-6;
+    @apply border-b border-dark-fade/10;
+}
+
+#app-holder main #content-header .content-header-left {
+    @apply flex flex-row;
+    @apply justify-evenly items-start;
+    @apply space-x-2;
+}
+
+#app-holder main #content-header .content-header-right {
+    @apply flex flex-row;
+    @apply justify-evenly items-end;
+    @apply space-x-2;
+}
+
+#app-holder main #content-block {
+    @apply flex flex-col;
+    @apply w-full flex-1;
+    @apply justify-start items-start;
+    @apply p-6;
+    @apply text-sm leading-normal;
+}
+
+#app-holder main footer {
+    @apply flex flex-row;
+    @apply justify-between items-center;
+    @apply w-full;
+    @apply px-6 h-16;
+    @apply border-t border-dark-fade/10;
+}
+
+/* **** sidebar menu links **** */
+#app-holder aside nav .menu-link {
+    @apply relative;
+    @apply text-center;
+}
+
+#app-holder aside nav .menu-link a {
+    @apply flex justify-center;
+    @apply p-3;
+    @apply rounded;
+    @apply border border-dark-fade/20;
+    @apply transition-all duration-100;
+}
+
+#app-holder aside nav .menu-link a > i {
+    @apply text-xl leading-5;
+}
+
+#app-holder aside nav .menu-link a.regular {
+    @apply bg-light-fade/0 text-light-grey;
+    @apply hover:bg-light-fade/25 hover:text-light;
+}
+
+#app-holder aside nav .menu-link a.active {
+    @apply bg-light-fade/50 text-light;
+    @apply hover:bg-light-fade/25 hover:text-light;
+}
+
+#app-holder aside nav .menu-link .tooltip {
+    @apply absolute left-full top-1/2 -translate-y-1/2;
+    @apply ml-6 px-2 py-1;
+    @apply rounded;
+    @apply text-sm whitespace-nowrap;
+    @apply bg-dark text-light;
+    @apply transition-all duration-100;
+}
+
+#app-holder aside nav .menu-link.logout a {
+    @apply bg-danger/25 text-light;
+    @apply hover:bg-danger/75 hover:text-light;
+}
+/* **** sidebar menu links **** */
+
+.list {
+    @apply flex flex-col;
+    @apply w-full h-auto;
+    @apply text-center;
+}
+
+.list .head,
+.list .body,
+.list .foot {
+    @apply w-full h-auto;
+}
+
+.list .row {
+    @apply flex flex-row;
+    @apply justify-between items-center;
+    @apply w-full h-auto;
+    @apply mb-2;
+}
+
+.list .row .cell {
+    @apply w-1/12;
+    @apply p-4;
+    @apply text-center;
+    @apply text-dark;
+}
+
+.list .head .row .cell {
+    @apply font-bold;
+}
+
+.list .foot .row .cell {
+    @apply w-full;
+}
+
+.list .body .row {
+    @apply rounded;
+    @apply bg-light-grey/15 hover:bg-light-fade/15;
+}
+
+#patients.list .row .cell {
+    @apply w-[12%];
+}
+
+#patients.list .row .cell:nth-child(1) {
+    @apply w-[3%];
+}
+
+#patients.list .row .cell:nth-child(2) {
+    @apply flex flex-col;
+    @apply justify-between items-start;
+    @apply w-[22%];
+    @apply text-left;
+}
+
+#patients.list .row .cell:nth-child(9) {
+    @apply w-[3%];
+}
+
+#patients.list .foot .row .cell {
+    @apply w-full;
+}
+
+
+#app-holder main #content-header .content-header-left{
+    @apply text-sm;
+    @apply leading-[14px];
+    @apply flex flex-row;
+}
+
+
+#app-holder main #content-header .content-header-left h3 {
+    @apply flex flex-row;
+    @apply h-10;
+    @apply pr-10;
+    @apply text-3xl font-bold;
+    @apply leading-[46px];
+    @apply text-accent;
+}
+
+#app-holder main #content-header .content-header-left h3 span {
+    @apply text-sm;
+    @apply leading-[42px];
+    @apply pl-2.5;
+    @apply text-dark-grey/75;
 }

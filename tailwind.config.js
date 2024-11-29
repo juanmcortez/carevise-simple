@@ -41,7 +41,7 @@ export default {
         },
         extend: {
             fontFamily: {
-                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                sans: ['Outfit', ...defaultTheme.fontFamily.sans],
             },
         },
     },
